@@ -1,5 +1,6 @@
 package com.example.gamma.myapplication
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -21,13 +22,20 @@ class Login : AppCompatActivity() {
         val Pass = editPass.text.toString()
 
         if ('@' in User){
-            val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("email", User)
-            }
-            startActivity(intent)
+            val result = Intent(this, MainActivity::class.java)
+            result.putExtra("User", User)
+            result.putExtra("Pass", Pass)
+            setResult(Activity.RESULT_OK,result)
+            finish()
         }
         else{
-            Toast.makeText(this, "Invalid Mail", Toast.LENGTH_SHORT).show()
+            if((User == null) or (Pass == null)){
+                Toast.makeText(this, "Empty elements", Toast.LENGTH_SHORT).show()
+            }
+            else if((User != null))
+            else{
+                Toast.makeText(this, "Invalid Mail", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
